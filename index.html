@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>清和｜个人画像与生涯网页</title>
+  <meta name="description" content="清和的个人画像、生涯方向、价值观、阅读书单与人生路径。">
+  <style>
+    :root {
+      --bg: #0f1115;
+      --bg-2: #0b0e13;
+      --panel: rgba(255,255,255,0.07);
+      --panel-2: rgba(255,255,255,0.045);
+      --text: #eef2f7;
+      --muted: #b6c0cd;
+      --line: rgba(255,255,255,0.12);
+      --line-strong: rgba(255,255,255,0.18);
+      --accent: #f3a7b5;
+      --accent-2: #93c5fd;
+      --good: #86efac;
+      --warn: #fcd34d;
+      --shadow: 0 18px 45px rgba(0,0,0,0.28);
+      --radius: 22px;
+      --nav-h: 64px;
+      --max: 1360px;
+      --hero-h: min(90vh, 860px);
+    }
+    body[data-theme="light"] {
+      --bg: #f5f7fb;
+      --bg-2: #eef3f9;
+      --panel: rgba(255,255,255,0.92);
+      --panel-2: rgba(255,255,255,0.72);
+      --text: #18212c;
+      --muted: #5f6c7b;
+      --line: rgba(20,32,50,0.10);
+      --line-strong: rgba(20,32,50,0.18);
+      --accent: #c96b83;
+      --accent-2: #3d74d8;
+      --good: #2f9b5f;
+      --warn: #b88818;
+      --shadow: 0 18px 45px rgba(25,40,65,0.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(243,167,181,.18), transparent 22%),
+        radial-gradient(circle at 85% 20%, rgba(147,197,253,.15), transparent 24%),
+        radial-gradient(circle at 70% 80%, rgba(134,239,172,.10), transparent 18%),
+        linear-gradient(180deg, #0c0f14, #10141a 35%, #0d1015 100%);
+      color: var(--text);
+      line-height: 1.75;
+      overflow-x: hidden;
+      transition: background .35s ease, color .25s ease;
+    }
+    body[data-theme="light"] {
+      background:
+        radial-gradient(circle at 12% 12%, rgba(201,107,131,.14), transparent 18%),
+        radial-gradient(circle at 88% 18%, rgba(61,116,216,.10), transparent 22%),
+        radial-gradient(circle at 70% 78%, rgba(47,155,95,.08), transparent 18%),
+        linear-gradient(180deg, #f7f9fc, #edf3fa 38%, #f4f7fb 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: rgba(147,197,253,.28); }
+
+    .progress {
+      position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 80;
+      background: rgba(255,255,255,.04);
+    }
+    .progress > i {
+      display: block; width: 0; height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(147,197,253,.5);
+      transition: width .08s linear;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 70;
+      backdrop-filter: blur(14px);
+      background: rgba(11,14,19,.72);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    body[data-theme="light"] .topbar { background: rgba(247,249,252,.76); }
+    .topbar-inner {
+      width: min(var(--max), calc(100% - 24px)); margin: 0 auto;
+      min-height: var(--nav-h); display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; padding: 10px 0;
+    }
+    .brand { display: flex; flex-direction: column; min-width: 0; }
+    .brand strong { font-size: 16px; letter-spacing: .02em; }
+    .brand span { color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .top-actions {
+      display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end;
+    }
+    .ghost-btn, .primary-btn {
+      border: 1px solid var(--line); background: rgba(255,255,255,.05); color: var(--text);
+      border-radius: 999px; padding: 9px 14px; font-size: 13px; cursor: pointer;
+      transition: .2s ease;
+    }
+    .ghost-btn:hover, .primary-btn:hover { transform: translateY(-1px); border-color: var(--line-strong); }
+    .primary-btn {
+      background: linear-gradient(90deg, rgba(243,167,181,.14), rgba(147,197,253,.16));
+    }
+    .lang-toggle.active, .theme-toggle.active { border-color: var(--line-strong); }
+
+    .hero-cover {
+      position: relative; min-height: var(--hero-h);
+      display: grid; place-items: center;
+      width: min(var(--max), calc(100% - 24px));
+      margin: 0 auto;
+      padding: 34px 0 10px;
+      isolation: isolate;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      overflow: hidden; border-radius: 32px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(243,167,181,.22), transparent 20%),
+        radial-gradient(circle at 82% 25%, rgba(147,197,253,.18), transparent 18%),
+        radial-gradient(circle at 68% 72%, rgba(134,239,172,.12), transparent 16%),
+        linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+      z-index: -2;
+    }
+    body[data-theme="light"] .hero-bg {
+      background:
+        radial-gradient(circle at 20% 30%, rgba(201,107,131,.16), transparent 20%),
+        radial-gradient(circle at 82% 25%, rgba(61,116,216,.14), transparent 18%),
+        radial-gradient(circle at 68% 72%, rgba(47,155,95,.08), transparent 16%),
+        linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,.42));
+    }
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(8px); opacity: .9;
+      animation: float 12s ease-in-out infinite;
+      mix-blend-mode: screen;
+    }
+    .orb.one { width: 240px; height: 240px; background: rgba(243,167,181,.18); left: 4%; top: 12%; animation-delay: -1s; }
+    .orb.two { width: 180px; height: 180px; background: rgba(147,197,253,.18); right: 8%; top: 18%; animation-delay: -4s; }
+    .orb.three { width: 160px; height: 160px; background: rgba(134,239,172,.14); right: 16%; bottom: 12%; animation-delay: -7s; }
+    .grid-noise {
+      position: absolute; inset: 0; z-index: -1; opacity: .28;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: radial-gradient(circle at center, black 46%, transparent 88%);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+      25% { transform: translateY(-18px) translateX(12px) scale(1.05); }
+      50% { transform: translateY(10px) translateX(-10px) scale(.98); }
+      75% { transform: translateY(-6px) translateX(14px) scale(1.03); }
+    }
+    .hero-cover-inner {
+      width: min(1100px, calc(100% - 32px));
+      display: grid; grid-template-columns: 1.25fr .75fr; gap: 18px; align-items: center;
+      padding: 42px 0;
+    }
+    .cover-main, .cover-side, .card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+      backdrop-filter: blur(14px); box-shadow: var(--shadow);
+    }
+    .cover-main { padding: 34px 28px; }
+    .cover-side { padding: 22px; display: grid; gap: 16px; }
+    .eyebrow {
+      color: var(--accent-2); font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .cover-main h1 {
+      font-size: clamp(34px, 6vw, 64px); line-height: 1.08; margin: 0 0 14px;
+      letter-spacing: -.03em;
+    }
+    .lead { font-size: clamp(15px, 2.1vw, 18px); color: var(--muted); margin: 0; }
+    .hero-quote {
+      margin-top: 18px; padding: 16px 18px; border-left: 3px solid var(--accent);
+      background: rgba(255,255,255,.03); border-radius: 16px; color: var(--text);
+    }
+    .cover-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+    .stat {
+      border: 1px solid var(--line); border-radius: 18px; padding: 14px; background: var(--panel-2);
+    }
+    .stat small { display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .stat strong { font-size: 16px; }
+    .big-word {
+      font-size: clamp(24px, 3.3vw, 34px); letter-spacing: .05em; margin: 2px 0 8px;
+    }
+    .chips, .pill-row {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .chip, .pill {
+      display: inline-flex; align-items: center; gap: 8px; border-radius: 999px;
+      padding: 8px 12px; background: rgba(255,255,255,.06); border: 1px solid var(--line); font-size: 13px;
+    }
+    .mini-title { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .contact-box { border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 6px; }
+    .contact-box a { color: var(--accent-2); }
+
+    .page {
+      width: min(var(--max), calc(100% - 24px)); margin: 18px auto 34px;
+      display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px;
+      align-items: start;
+    }
+    .main { min-width: 0; display: grid; gap: 18px; }
+    .quick-nav {
+      display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 10px; scrollbar-width: none;
+    }
+    .quick-nav::-webkit-scrollbar { display: none; }
+    .quick-nav a {
+      white-space: nowrap; padding: 10px 14px; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--panel-2); font-size: 13px;
+    }
+    .quick-nav a.active { border-color: var(--line-strong); background: rgba(147,197,253,.12); }
+
+    .card {
+      padding: 22px;
+    }
+    .card h2 {
+      margin: 0 0 18px; font-size: 28px; letter-spacing: -.02em;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .anchor {
+      font-size: 16px; color: var(--muted); opacity: 0; transition: .2s ease;
+      border: 1px solid transparent; padding: 2px 8px; border-radius: 999px;
+    }
+    .card h2:hover .anchor { opacity: 1; }
+    .anchor:hover { border-color: var(--line); color: var(--accent-2); }
+    .grid-2, .grid-3 {
+      display: grid; gap: 14px;
+    }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .subcard {
+      padding: 18px; border-radius: 18px; border: 1px solid var(--line); background: var(--panel-2);
+    }
+    .subcard h3 { margin: 0 0 10px; font-size: 18px; }
+    p, li { color: var(--text); }
+    .muted, .small { color: var(--muted); }
+    .small { font-size: 14px; }
+    ul, ol { padding-left: 1.2rem; margin: 0; }
+    .tag-warn {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      background: rgba(252,211,77,.16); color: var(--warn); font-size: 13px; margin-right: 6px;
+    }
+
+    .score {
+      display: grid; grid-template-columns: 88px 1fr; gap: 12px; align-items: center; margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .bar {
+      height: 10px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; border: 1px solid var(--line);
+    }
+    .fill {
+      height: 100%; border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .timeline {
+      position: relative; margin-top: 8px; padding-left: 26px; display: grid; gap: 16px;
+    }
+    .timeline::before {
+      content: ""; position: absolute; left: 8px; top: 6px; bottom: 8px; width: 2px;
+      background: linear-gradient(180deg, var(--accent), rgba(147,197,253,.25));
+    }
+    .timeline-item {
+      position: relative; padding: 16px 16px 16px 18px; border-radius: 18px;
+      border: 1px solid var(--line); background: var(--panel-2);
+    }
+    .timeline-item::before {
+      content: ""; position: absolute; left: -23px; top: 22px; width: 12px; height: 12px;
+      border-radius: 50%; background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 0 4px rgba(147,197,253,.10);
+    }
+    .timeline-item small { color: var(--muted); display: block; margin-bottom: 6px; }
+    .timeline-item strong { display: block; font-size: 18px; margin-bottom: 6px; }
+
+    .book-accordion { display: grid; gap: 12px; }
+    .book-group {
+      border: 1px solid var(--line); border-radius: 18px; background: var(--panel-2); overflow: hidden;
+    }
+    .book-toggle {
+      width: 100%; border: 0; background: transparent; color: var(--text); text-align: left;
+      padding: 16px 18px; font: inherit; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .book-toggle:hover { background: rgba(255,255,255,.03); }
+    .book-toggle span { color: var(--muted); font-size: 14px; }
+    .book-panel {
+      max-height: 0; overflow: hidden; transition: max-height .32s ease;
+      border-top: 1px solid transparent;
+    }
+    .book-group.open .book-panel {
+      border-top-color: var(--line);
+    }
+    .book-panel-inner { padding: 16px 18px 18px; }
+    .book-list { display: grid; gap: 10px; }
+    .book-item {
+      padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.035); border: 1px solid var(--line);
+    }
+    .book-item strong { display: block; margin-bottom: 4px; }
+    .book-item p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .toc-wrap {
+      position: sticky; top: calc(var(--nav-h) + 18px);
+      display: grid; gap: 14px;
+    }
+    .toc {
+      border: 1px solid var(--line); background: var(--panel); border-radius: var(--radius);
+      padding: 16px; backdrop-filter: blur(14px); box-shadow: var(--shadow);
+    }
+    .toc h3 { margin: 0 0 10px; font-size: 16px; }
+    .toc a {
+      display: block; padding: 8px 10px; border-radius: 12px; color: var(--muted); font-size: 14px;
+      border: 1px solid transparent;
+    }
+    .toc a.active, .toc a:hover {
+      color: var(--text); background: rgba(147,197,253,.10); border-color: var(--line);
+    }
+    .toc-note {
+      padding: 14px 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--panel-2);
+      color: var(--muted); font-size: 14px;
+    }
+
+    .mobile-toc-toggle { display: none; }
+    .floating-tools {
+      position: fixed; right: 18px; bottom: 22px; z-index: 60; display: grid; gap: 10px;
+    }
+    .fab {
+      width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line);
+      background: rgba(15,17,21,.78); color: var(--text); cursor: pointer;
+      box-shadow: var(--shadow); backdrop-filter: blur(12px); font-size: 18px;
+    }
+    body[data-theme="light"] .fab { background: rgba(255,255,255,.82); }
+    .fab.hide { opacity: 0; pointer-events: none; transform: translateY(8px); }
+    .tool-tip {
+      position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%) translateY(18px);
+      padding: 10px 14px; border-radius: 999px; font-size: 13px; color: var(--text);
+      background: rgba(0,0,0,.68); border: 1px solid rgba(255,255,255,.12); opacity: 0; pointer-events: none;
+      transition: .22s ease; z-index: 90;
+    }
+    .tool-tip.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .footer {
+      width: min(var(--max), calc(100% - 24px)); margin: 0 auto 34px;
+      color: var(--muted); font-size: 14px; text-align: center; padding: 4px 0 20px;
+    }
+
+    @media (max-width: 1120px) {
+      .page { grid-template-columns: 1fr; }
+      .toc-wrap { position: static; }
+      .hero-cover-inner, .grid-3 { grid-template-columns: 1fr; }
+      .mobile-toc-toggle { display: inline-flex; }
+    }
+    @media (max-width: 780px) {
+      :root { --nav-h: 58px; }
+      .topbar-inner { gap: 12px; }
+      .top-actions { gap: 8px; }
+      .cover-main, .card, .cover-side { padding: 18px; }
+      .grid-2, .stats-grid { grid-template-columns: 1fr; }
+      .card h2 { font-size: 24px; }
+      .cover-main h1 { font-size: clamp(30px, 9vw, 48px); }
+      .floating-tools { right: 12px; bottom: 14px; }
+      .score { grid-template-columns: 72px 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <strong data-i18n="brandTitle">清和｜个人画像与生涯网页</strong>
+        <span data-i18n="brandSub">增强版：封面动画、时间轴、可折叠书单、中英双语、日夜切换</span>
+      </div>
+      <div class="top-actions">
+        <button class="ghost-btn mobile-toc-toggle" id="mobileTocBtn" type="button" data-i18n="tocBtn">目录</button>
+        <button class="ghost-btn lang-toggle" id="langToggle" type="button">EN</button>
+        <button class="ghost-btn theme-toggle" id="themeToggle" type="button" aria-label="切换日夜模式">☀️ 日间</button>
+        <a class="ghost-btn" href="#books" data-i18n="navBooks">书单</a>
+        <a class="primary-btn" href="#advice" data-i18n="navAdvice">行动建议</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-cover" id="home">
+    <div class="hero-bg"></div>
+    <div class="grid-noise"></div>
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+
+    <div class="hero-cover-inner">
+      <div class="cover-main">
+        <div class="eyebrow" data-i18n="coverEyebrow">Personal Web · distilled from long conversations</div>
+        <h1 data-i18n="coverTitle">清和｜真实、自由、善良</h1>
+        <p class="lead" data-i18n="coverLead">这不是一份“标签式评估”，而是一张阶段性的个人地图：它总结了你的价值观、性格结构、潜能、盲点、职业路径、能力缺口与生活方式倾向。核心结论很清晰：你是一个以理解世界为方向、以善良为底色、以自由为长期目标的人。</p>
+        <div class="hero-quote" data-i18n="coverQuote">“我想看清世界，但不因此失去善良；我想拥有自由，但不以虚假的方式逃离现实；我想留下表达，但首先希望自己真实地活过。”</div>
+        <div class="cover-actions">
+          <a class="primary-btn" href="#timeline" data-i18n="ctaTimeline">查看人生路径</a>
+          <a class="ghost-btn" href="#career" data-i18n="ctaCareer">查看职业方向</a>
+        </div>
+      </div>
+
+      <div class="cover-side">
+        <div>
+          <div class="mini-title" data-i18n="coverMini1">三词底色</div>
+          <p class="big-word" data-i18n="coverWords">真实 · 自由 · 善良</p>
+          <div class="chips">
+            <span class="chip" data-i18n="chip1">世界观察者</span>
+            <span class="chip" data-i18n="chip2">思考型表达者</span>
+            <span class="chip" data-i18n="chip3">现实主义理想派</span>
+            <span class="chip" data-i18n="chip4">意义驱动</span>
+            <span class="chip" data-i18n="chip5">体验优先</span>
+          </div>
+        </div>
+        <div>
+          <div class="mini-title" data-i18n="coverMini2">一句话画像</div>
+          <p class="muted" data-i18n="coverSentence">一个刚刚开始人生、对世界充满好奇、希望保持温度并逐步靠近自由的人。</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat"><small data-i18n="stat1Label">核心驱动力</small><strong data-i18n="stat1Val">理解世界</strong></div>
+          <div class="stat"><small data-i18n="stat2Label">人生底色</small><strong data-i18n="stat2Val">善良</strong></div>
+          <div class="stat"><small data-i18n="stat3Label">长期目标</small><strong data-i18n="stat3Val">自由</strong></div>
+          <div class="stat"><small data-i18n="stat4Label">主要表达方式</small><strong data-i18n="stat4Val">旅行 + 写作</strong></div>
+        </div>
+        <div class="contact-box">
+          <strong data-i18n="contactLabel">联系方式</strong>
+          <a href="mailto:1447142086@qq.com">1447142086@qq.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page">
+    <main class="main">
+      <nav class="quick-nav" id="quickNav">
+        <a href="#worldview" data-i18n="sec1">三观</a>
+        <a href="#personality" data-i18n="sec2">性格</a>
+        <a href="#talent" data-i18n="sec3">潜能与优势</a>
+        <a href="#limits" data-i18n="sec4">缺陷与局限</a>
+        <a href="#skills" data-i18n="sec5">待提高能力</a>
+        <a href="#career" data-i18n="sec6">职业方向</a>
+        <a href="#plan" data-i18n="sec7">职业规划</a>
+        <a href="#timeline" data-i18n="sec8">人生路径</a>
+        <a href="#lifestyle" data-i18n="sec9">生活方式</a>
+        <a href="#books" data-i18n="sec10">书单</a>
+        <a href="#advice" data-i18n="sec11">建议</a>
+        <a href="#contact" data-i18n="sec12">联系我</a>
+      </nav>
+
+      <section id="worldview" class="card section-target">
+        <h2><span data-i18n="h1">一、你的三观提炼</span> <a class="anchor" href="#worldview" data-anchor="#worldview" title="复制本节链接">#</a></h2>
+        <div class="grid-3">
+          <div class="subcard">
+            <h3 data-i18n="wv1">1. 世界观</h3>
+            <ul>
+              <li data-i18n="wv1a">世界是复杂、流动、没有单一标准答案的。</li>
+              <li data-i18n="wv1b">理解世界没有终点，探索本身就有价值。</li>
+              <li data-i18n="wv1c">你更关心“叙事背后的真实”，而不是表层立场。</li>
+              <li data-i18n="wv1d">你相信历史、处境、环境会深刻影响人。</li>
+            </ul>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="wv2">2. 人生观</h3>
+            <ul>
+              <li data-i18n="wv2a">人生意义更来自体验、理解、表达与自我改变，而不只是成就或名声。</li>
+              <li data-i18n="wv2b">自由不是没有束缚，而是能主动选择自己愿意承担的束缚。</li>
+              <li data-i18n="wv2c">你想活得真实，不愿被虚假叙事或机械生活吞没。</li>
+            </ul>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="wv3">3. 价值观</h3>
+            <ul>
+              <li data-i18n="wv3a"><strong>善良</strong> 是你最想守住的底线。</li>
+              <li data-i18n="wv3b">你重视共情，但不希望过度情绪化；你追求理解本质与平和处理问题。</li>
+              <li data-i18n="wv3c">深度、真实、少数人真正理解，优先于大众热闹。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill" data-i18n="pill1">存在主义倾向</span>
+          <span class="pill" data-i18n="pill2">过程重于结果</span>
+          <span class="pill" data-i18n="pill3">复杂性接受</span>
+          <span class="pill" data-i18n="pill4">清醒但不犬儒</span>
+          <span class="pill" data-i18n="pill5">善意优先于冷酷效率</span>
+        </div>
+      </section>
+
+      <section id="personality" class="card section-target">
+        <h2><span data-i18n="h2">二、你的性格特点</span> <a class="anchor" href="#personality" data-anchor="#personality" title="复制本节链接">#</a></h2>
+        <div class="grid-2">
+          <div class="subcard">
+            <h3 data-i18n="pCore">性格核心</h3>
+            <p data-i18n="pCoreText">你是典型的 <strong>观察者 + 思考者 + 记录者</strong> 混合型人格。你会被人、城市、历史、冲突、文明、时间流逝所吸引，既想体验，又想理解；既有理想，又有现实感。</p>
+            <div class="score"><div data-i18n="s1">好奇心</div><div class="bar"><div class="fill" style="width:95%"></div></div></div>
+            <div class="score"><div data-i18n="s2">共情能力</div><div class="bar"><div class="fill" style="width:88%"></div></div></div>
+            <div class="score"><div data-i18n="s3">反思能力</div><div class="bar"><div class="fill" style="width:92%"></div></div></div>
+            <div class="score"><div data-i18n="s4">现实感</div><div class="bar"><div class="fill" style="width:78%"></div></div></div>
+            <div class="score"><div data-i18n="s5">冒险倾向</div><div class="bar"><div class="fill" style="width:72%"></div></div></div>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="pTrait">具体特征</h3>
+            <ul>
+              <li data-i18n="p1">体验优先：先感受，再记录，再表达。</li>
+              <li data-i18n="p2">不爱浅层社交，但喜欢有深度的交流。</li>
+              <li data-i18n="p3">不喜欢无意义流程和重复劳动。</li>
+              <li data-i18n="p4">对“真实的人类处境”比对“热闹成功叙事”更感兴趣。</li>
+              <li data-i18n="p5">希望清醒，但不想因此失去温度。</li>
+              <li data-i18n="p6">更倾向少数真正理解你的人，而不是广泛但浅层的认可。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="talent" class="card section-target">
+        <h2><span data-i18n="h3">三、你的潜能与优势</span> <a class="anchor" href="#talent" data-anchor="#talent" title="复制本节链接">#</a></h2>
+        <div class="grid-3">
+          <div class="subcard">
+            <h3 data-i18n="t1">表达潜能</h3>
+            <ul>
+              <li data-i18n="t1a">语言表达清晰，有抽象总结能力。</li>
+              <li data-i18n="t1b">具备长期写作潜质，适合散文、观察写作、人物记录、非虚构。</li>
+              <li data-i18n="t1c">写作对你不仅是输出，也是理解自己的工具。</li>
+            </ul>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="t2">观察潜能</h3>
+            <ul>
+              <li data-i18n="t2a">善于观察人，能对情绪、动机、环境变化保持敏感。</li>
+              <li data-i18n="t2b">更容易看见表象背后的结构和矛盾。</li>
+              <li data-i18n="t2c">具备做访谈、田野观察、人物记录的潜能。</li>
+            </ul>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="t3">项目潜能</h3>
+            <ul>
+              <li data-i18n="t3a">你并非纯文艺型，也有组织事情、推动项目的能力。</li>
+              <li data-i18n="t3b">适合做“有主题、有结构、有长期积累”的项目。</li>
+              <li data-i18n="t3c">适合在现实职业中建立能力，再把观察转化成作品。</li>
+            </ul>
+          </div>
+        </div>
+        <p class="small" data-i18n="talentFoot">高潜组合：<strong>观察人 + 研究问题 + 语言表达 + 项目组织</strong>。这类组合很适合成为：深度内容作者、纪录片/非虚构创作者、产品/策略型人才、研究与访谈类工作者。</p>
+      </section>
+
+      <section id="limits" class="card section-target">
+        <h2><span data-i18n="h4">四、你的缺陷、短板与局限</span> <a class="anchor" href="#limits" data-anchor="#limits" title="复制本节链接">#</a></h2>
+        <div class="grid-2">
+          <div class="subcard">
+            <h3 data-i18n="l1">短板</h3>
+            <ul>
+              <li data-i18n="l1a"><strong>输入多、输出少</strong>：容易想很多，但未形成稳定输出机制。</li>
+              <li data-i18n="l1b"><strong>专业与兴趣错位</strong>：工业工程背景与人文/观察兴趣存在张力。</li>
+              <li data-i18n="l1c"><strong>对重复劳动耐受度低</strong>：不适合长期机械、封闭、单调岗位。</li>
+              <li data-i18n="l1d"><strong>方向感尚未完全落地</strong>：理想清晰，但现实路径仍处早期搭建阶段。</li>
+            </ul>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="l2">局限与风险</h3>
+            <ul>
+              <li data-i18n="l2a"><strong>容易理想化“真实”</strong>：可能对某些地方、某些人性状态有想象性投射。</li>
+              <li data-i18n="l2b"><strong>容易被精神意义驱动</strong>：如果长期没有 spark，可能感到空虚、倦怠。</li>
+              <li data-i18n="l2c"><strong>容易陷入过度思考</strong>：理解很多，但行动节奏不够稳时，会形成内耗。</li>
+              <li data-i18n="l2d"><strong>善良的代价</strong>：若没有边界和判断，善良会变成受伤点。</li>
+            </ul>
+          </div>
+        </div>
+        <p class="small"><span class="tag-warn" data-i18n="warnTag">关键提醒：</span> <span data-i18n="warnText">你最怕的是变冷漠。未来真正要防的，不只是“失败”，而是长期重复、麻木、无输出、无新体验造成的精神钝化。</span></p>
+      </section>
+
+      <section id="skills" class="card section-target">
+        <h2><span data-i18n="h5">五、急待提高的能力与职业技能</span> <a class="anchor" href="#skills" data-anchor="#skills" title="复制本节链接">#</a></h2>
+        <div class="grid-3">
+          <div class="subcard">
+            <h3 data-i18n="sk1">核心能力</h3>
+            <ul>
+              <li data-i18n="sk1a">结构化思考与表达</li>
+              <li data-i18n="sk1b">长期写作与观察记录</li>
+              <li data-i18n="sk1c">情绪边界与成熟沟通</li>
+              <li data-i18n="sk1d">持续行动与自我管理</li>
+            </ul>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="sk2">职业技能</h3>
+            <ul>
+              <li data-i18n="sk2a">Excel / 数据分析</li>
+              <li data-i18n="sk2b">工业工程基础：精益、流程优化、现场管理</li>
+              <li data-i18n="sk2c">项目管理与跨部门沟通</li>
+              <li data-i18n="sk2d">英语（尤其是阅读、听力、表达）</li>
+            </ul>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="sk3">具体优先级</h3>
+            <ol>
+              <li data-i18n="sk3a">英语</li>
+              <li data-i18n="sk3b">Excel / 数据能力</li>
+              <li data-i18n="sk3c">IE / 精益生产知识</li>
+              <li data-i18n="sk3d">稳定写作习惯</li>
+              <li data-i18n="sk3e">基本投资认知（而非高风险交易冲动）</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="career" class="card section-target">
+        <h2><span data-i18n="h6">六、你最适合的职业</span> <a class="anchor" href="#career" data-anchor="#career" title="复制本节链接">#</a></h2>
+        <div class="grid-2">
+          <div class="subcard">
+            <h3 data-i18n="c1">近期最适合（现实可行）</h3>
+            <ul>
+              <li data-i18n="c1a"><strong>工业工程师 / 精益工程师</strong>：比模具设计更匹配你的组织、分析与优化倾向。</li>
+              <li data-i18n="c1b"><strong>制造业运营 / 生产管理 / 供应链方向</strong>：适合建立现实能力与资源基础。</li>
+              <li data-i18n="c1c"><strong>外企制造类岗位</strong>：更规范，也更有利于英语和国际视野发展。</li>
+            </ul>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="c2">中长期高匹配（副线或转型）</h3>
+            <ul>
+              <li data-i18n="c2a">非虚构写作者 / 深度内容作者</li>
+              <li data-i18n="c2b">纪录片或访谈型内容创作</li>
+              <li data-i18n="c2c">产品 / 策略 / 研究型岗位</li>
+              <li data-i18n="c2d">旅行写作、社会观察、自媒体深度表达</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="plan" class="card section-target">
+        <h2><span data-i18n="h7">七、你的职业生涯规划</span> <a class="anchor" href="#plan" data-anchor="#plan" title="复制本节链接">#</a></h2>
+        <div class="grid-3">
+          <div class="subcard">
+            <h3 data-i18n="p71">阶段一（23–26）</h3>
+            <p data-i18n="p71t">先进入社会，建立稳定收入、行业理解、基本职业能力与储蓄。重点是：适应工作、观察行业、学英语、补数据与IE技能。</p>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="p72">阶段二（26–30）</h3>
+            <p data-i18n="p72t">尝试跳向更高质量的平台，如外企、IE/精益、运营管理等方向。开始形成更强的职业自主性，同时持续写作与记录。</p>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="p73">阶段三（30+）</h3>
+            <p data-i18n="p73t">在具备资金、语言与世界经验后，逐步靠近“旅行 + 写作 + 观察世界”的长期理想生活，可能发展出书、纪录片或长期非虚构项目。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline" class="card section-target">
+        <h2><span data-i18n="h8">八、时间轴式人生路径</span> <a class="anchor" href="#timeline" data-anchor="#timeline" title="复制本节链接">#</a></h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <small data-i18n="tl1y">现在 · 23岁</small>
+            <strong data-i18n="tl1t">进入现实世界，开始搭建人生系统</strong>
+            <div data-i18n="tl1d">重点不是一次性找到完美职业，而是先积累社会经验、现金流、英语和可迁移能力，同时保护你的好奇心与写作冲动。</div>
+          </div>
+          <div class="timeline-item">
+            <small data-i18n="tl2y">24–26岁</small>
+            <strong data-i18n="tl2t">完成从“学生”到“可独立生存的人”的转变</strong>
+            <div data-i18n="tl2d">逐步从不适合的岗位中识别方向，向IE、精益、运营、外企制造方向靠近；让现实更稳，让表达不断线。</div>
+          </div>
+          <div class="timeline-item">
+            <small data-i18n="tl3y">26–30岁</small>
+            <strong data-i18n="tl3t">建立更大的行动自由</strong>
+            <div data-i18n="tl3d">存款、能力、语言和工作平台逐渐成熟，可以开始更长期地旅行、看世界，并把观察沉淀成文章、访谈或系列主题项目。</div>
+          </div>
+          <div class="timeline-item">
+            <small data-i18n="tl4y">30岁以后</small>
+            <strong data-i18n="tl4t">逐步靠近“自由而清醒”的生活方式</strong>
+            <div data-i18n="tl4d">一边维持稳定的现实基础，一边在不同地方生活、采访和写作，最终形成属于自己的非虚构叙事或长期个人作品。</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="lifestyle" class="card section-target">
+        <h2><span data-i18n="h9">九、你最适合的生活方式</span> <a class="anchor" href="#lifestyle" data-anchor="#lifestyle" title="复制本节链接">#</a></h2>
+        <div class="grid-2">
+          <div class="subcard">
+            <h3 data-i18n="ls1">最匹配的结构</h3>
+            <p data-i18n="ls1t"><strong>稳定职业 + 长期阅读 + 持续写作 + 偶尔离开熟悉环境</strong>。你不适合完全封闭、纯功利、长期高重复的人生，也不适合完全脱离现实的漂浮式理想主义。</p>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="ls2">理想状态</h3>
+            <p data-i18n="ls2t">有一份能带来稳定收入与时间边界的工作，保留写作、记录和投资习惯；未来在不同城市或国家长期生活一段时间，观察人，理解社会，形成自己的视角。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="books" class="card section-target">
+        <h2><span data-i18n="h10">十、推荐书单（可折叠）</span> <a class="anchor" href="#books" data-anchor="#books" title="复制本节链接">#</a></h2>
+        <div class="book-accordion">
+          <div class="book-group open">
+            <button class="book-toggle" type="button">
+              <strong data-i18n="bk1">理解世界：历史与社会</strong>
+              <span data-i18n="toggleHint">点击展开 / 收起</span>
+            </button>
+            <div class="book-panel">
+              <div class="book-panel-inner book-list">
+                <div class="book-item"><strong>《全球通史》</strong><p data-i18n="bk1a">建立全球历史脉络感，帮助你理解国家、文明与长期结构。</p></div>
+                <div class="book-item"><strong>《枪炮、病菌与钢铁》</strong><p data-i18n="bk1b">用宏观视角理解历史不平等的形成方式。</p></div>
+                <div class="book-item"><strong>《置身事内》</strong><p data-i18n="bk1c">理解中国现实运行逻辑，帮助你从抽象兴趣回到社会结构。</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="book-group">
+            <button class="book-toggle" type="button">
+              <strong data-i18n="bk2">理解人性：心理与认知</strong>
+              <span data-i18n="toggleHint">点击展开 / 收起</span>
+            </button>
+            <div class="book-panel">
+              <div class="book-panel-inner book-list">
+                <div class="book-item"><strong>《思考，快与慢》</strong><p data-i18n="bk2a">训练你识别判断偏差，提升结构化思考能力。</p></div>
+                <div class="book-item"><strong>《社会性动物》</strong><p data-i18n="bk2b">理解个体如何在关系、群体与社会环境中形成行为。</p></div>
+                <div class="book-item"><strong>《少有人走的路》</strong><p data-i18n="bk2c">帮助你理解成长、责任、边界与心理成熟。</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="book-group">
+            <button class="book-toggle" type="button">
+              <strong data-i18n="bk3">表达训练：写作与观察</strong>
+              <span data-i18n="toggleHint">点击展开 / 收起</span>
+            </button>
+            <div class="book-panel">
+              <div class="book-panel-inner book-list">
+                <div class="book-item"><strong>《金字塔原理》</strong><p data-i18n="bk3a">你最急需补强的结构表达工具书。</p></div>
+                <div class="book-item"><strong>何伟作品（如《江城》《寻路中国》）</strong><p data-i18n="bk3b">非常适合你：现实观察、人物书写、跨文化理解。</p></div>
+                <div class="book-item"><strong>《写作是门手艺》</strong><p data-i18n="bk3c">帮助你把“想写”变成“能持续写”。</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="book-group">
+            <button class="book-toggle" type="button">
+              <strong data-i18n="bk4">职业与能力：现实世界的底盘</strong>
+              <span data-i18n="toggleHint">点击展开 / 收起</span>
+            </button>
+            <div class="book-panel">
+              <div class="book-panel-inner book-list">
+                <div class="book-item"><strong>《启示录：打造用户喜爱的产品》</strong><p data-i18n="bk4a">如果你未来想向产品、策略、研究方向靠近，这本书很有帮助。</p></div>
+                <div class="book-item"><strong>《原则》</strong><p data-i18n="bk4b">建立长期决策、系统思考与现实执行框架。</p></div>
+                <div class="book-item"><strong>《精益思想》</strong><p data-i18n="bk4c">如果你留在制造业或IE方向，这是非常实用的底层书。</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="advice" class="card section-target">
+        <h2><span data-i18n="h11">十一、给你的建议</span> <a class="anchor" href="#advice" data-anchor="#advice" title="复制本节链接">#</a></h2>
+        <div class="grid-3">
+          <div class="subcard">
+            <h3 data-i18n="ad1">先站稳，再远行</h3>
+            <p data-i18n="ad1t">你并不适合一开始就“为了自由而放弃现实”，更适合先建立职业底盘、现金流和能力，再换取真正的时间与地点自由。</p>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="ad2">不要只输入，要开始长期输出</h3>
+            <p data-i18n="ad2t">每周至少写一篇观察或思考，哪怕 500–1000 字。你的很多潜能只有通过输出才会变成能力。</p>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="ad3">保护你的善良，但给它加上边界和判断</h3>
+            <p data-i18n="ad3t">你不需要变冷酷才算成熟。你需要的是清醒的善良，而不是无边界的消耗。</p>
+          </div>
+        </div>
+        <p class="small" data-i18n="adFoot">最终你真正要守住的，不只是“职业发展”，而是：在现实里站稳之后，仍然保有好奇、表达、善良和对世界的持续兴趣。</p>
+      </section>
+
+      <section id="contact" class="card section-target">
+        <h2><span data-i18n="h12">十二、联系我</span> <a class="anchor" href="#contact" data-anchor="#contact" title="复制本节链接">#</a></h2>
+        <div class="grid-2">
+          <div class="subcard">
+            <h3 data-i18n="ct1">邮箱</h3>
+            <p><a href="mailto:1447142086@qq.com">1447142086@qq.com</a></p>
+          </div>
+          <div class="subcard">
+            <h3 data-i18n="ct2">适合联系的话题</h3>
+            <p data-i18n="ct2t">世界观察、城市与人、非虚构写作、制造业现实、旅行、自由、善良与如何在复杂中保持温度。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="toc-wrap" id="tocPanel">
+      <nav class="toc">
+        <h3 data-i18n="tocTitle">页面目录</h3>
+        <a href="#worldview" data-i18n="sec1">三观</a>
+        <a href="#personality" data-i18n="sec2">性格</a>
+        <a href="#talent" data-i18n="sec3">潜能与优势</a>
+        <a href="#limits" data-i18n="sec4">缺陷与局限</a>
+        <a href="#skills" data-i18n="sec5">待提高能力</a>
+        <a href="#career" data-i18n="sec6">职业方向</a>
+        <a href="#plan" data-i18n="sec7">职业规划</a>
+        <a href="#timeline" data-i18n="sec8">人生路径</a>
+        <a href="#lifestyle" data-i18n="sec9">生活方式</a>
+        <a href="#books" data-i18n="sec10">书单</a>
+        <a href="#advice" data-i18n="sec11">建议</a>
+        <a href="#contact" data-i18n="sec12">联系我</a>
+      </nav>
+      <div class="toc-note" data-i18n="tocNote">这是一张阶段性的个人地图，不是终局结论。你最重要的任务不是立刻成为谁，而是持续成为更清醒、更自由、也更善良的人。</div>
+    </aside>
+  </div>
+
+  <footer class="footer" data-i18n="footer">Made for 清和 · 一个刚刚开始人生、对世界保持好奇的人。</footer>
+
+  <div class="floating-tools">
+    <button class="fab hide" id="toTopBtn" title="回到顶部" aria-label="回到顶部">↑</button>
+  </div>
+  <div class="tool-tip" id="toolTip">已复制链接</div>
+
+  <script>
+    const I18N = {
+      zh: {
+        brandTitle: "清和｜个人画像与生涯网页",
+        brandSub: "增强版：封面动画、时间轴、可折叠书单、中英双语、日夜切换",
+        tocBtn: "目录",
+        navBooks: "书单",
+        navAdvice: "行动建议",
+        coverEyebrow: "Personal Web · distilled from long conversations",
+        coverTitle: "清和｜真实、自由、善良",
+        coverLead: "这不是一份“标签式评估”，而是一张阶段性的个人地图：它总结了你的价值观、性格结构、潜能、盲点、职业路径、能力缺口与生活方式倾向。核心结论很清晰：你是一个以理解世界为方向、以善良为底色、以自由为长期目标的人。",
+        coverQuote: "“我想看清世界，但不因此失去善良；我想拥有自由，但不以虚假的方式逃离现实；我想留下表达，但首先希望自己真实地活过。”",
+        ctaTimeline: "查看人生路径",
+        ctaCareer: "查看职业方向",
+        coverMini1: "三词底色",
+        coverWords: "真实 · 自由 · 善良",
+        chip1: "世界观察者", chip2: "思考型表达者", chip3: "现实主义理想派", chip4: "意义驱动", chip5: "体验优先",
+        coverMini2: "一句话画像",
+        coverSentence: "一个刚刚开始人生、对世界充满好奇、希望保持温度并逐步靠近自由的人。",
+        stat1Label: "核心驱动力", stat1Val: "理解世界",
+        stat2Label: "人生底色", stat2Val: "善良",
+        stat3Label: "长期目标", stat3Val: "自由",
+        stat4Label: "主要表达方式", stat4Val: "旅行 + 写作",
+        contactLabel: "联系方式",
+        sec1:"三观", sec2:"性格", sec3:"潜能与优势", sec4:"缺陷与局限", sec5:"待提高能力", sec6:"职业方向", sec7:"职业规划", sec8:"人生路径", sec9:"生活方式", sec10:"书单", sec11:"建议", sec12:"联系我",
+        h1:"一、你的三观提炼", h2:"二、你的性格特点", h3:"三、你的潜能与优势", h4:"四、你的缺陷、短板与局限", h5:"五、急待提高的能力与职业技能", h6:"六、你最适合的职业", h7:"七、你的职业生涯规划", h8:"八、时间轴式人生路径", h9:"九、你最适合的生活方式", h10:"十、推荐书单（可折叠）", h11:"十一、给你的建议", h12:"十二、联系我",
+        wv1:"1. 世界观", wv1a:"世界是复杂、流动、没有单一标准答案的。", wv1b:"理解世界没有终点，探索本身就有价值。", wv1c:"你更关心“叙事背后的真实”，而不是表层立场。", wv1d:"你相信历史、处境、环境会深刻影响人。",
+        wv2:"2. 人生观", wv2a:"人生意义更来自体验、理解、表达与自我改变，而不只是成就或名声。", wv2b:"自由不是没有束缚，而是能主动选择自己愿意承担的束缚。", wv2c:"你想活得真实，不愿被虚假叙事或机械生活吞没。",
+        wv3:"3. 价值观", wv3a:"<strong>善良</strong> 是你最想守住的底线。", wv3b:"你重视共情，但不希望过度情绪化；你追求理解本质与平和处理问题。", wv3c:"深度、真实、少数人真正理解，优先于大众热闹。",
+        pill1:"存在主义倾向", pill2:"过程重于结果", pill3:"复杂性接受", pill4:"清醒但不犬儒", pill5:"善意优先于冷酷效率",
+        pCore:"性格核心", pCoreText:"你是典型的 <strong>观察者 + 思考者 + 记录者</strong> 混合型人格。你会被人、城市、历史、冲突、文明、时间流逝所吸引，既想体验，又想理解；既有理想，又有现实感。",
+        s1:"好奇心", s2:"共情能力", s3:"反思能力", s4:"现实感", s5:"冒险倾向",
+        pTrait:"具体特征", p1:"体验优先：先感受，再记录，再表达。", p2:"不爱浅层社交，但喜欢有深度的交流。", p3:"不喜欢无意义流程和重复劳动。", p4:"对“真实的人类处境”比对“热闹成功叙事”更感兴趣。", p5:"希望清醒，但不想因此失去温度。", p6:"更倾向少数真正理解你的人，而不是广泛但浅层的认可。",
+        t1:"表达潜能", t1a:"语言表达清晰，有抽象总结能力。", t1b:"具备长期写作潜质，适合散文、观察写作、人物记录、非虚构。", t1c:"写作对你不仅是输出，也是理解自己的工具。",
+        t2:"观察潜能", t2a:"善于观察人，能对情绪、动机、环境变化保持敏感。", t2b:"更容易看见表象背后的结构和矛盾。", t2c:"具备做访谈、田野观察、人物记录的潜能。",
+        t3:"项目潜能", t3a:"你并非纯文艺型，也有组织事情、推动项目的能力。", t3b:"适合做“有主题、有结构、有长期积累”的项目。", t3c:"适合在现实职业中建立能力，再把观察转化成作品。", talentFoot:"高潜组合：<strong>观察人 + 研究问题 + 语言表达 + 项目组织</strong>。这类组合很适合成为：深度内容作者、纪录片/非虚构创作者、产品/策略型人才、研究与访谈类工作者。",
+        l1:"短板", l1a:"<strong>输入多、输出少</strong>：容易想很多，但未形成稳定输出机制。", l1b:"<strong>专业与兴趣错位</strong>：工业工程背景与人文/观察兴趣存在张力。", l1c:"<strong>对重复劳动耐受度低</strong>：不适合长期机械、封闭、单调岗位。", l1d:"<strong>方向感尚未完全落地</strong>：理想清晰，但现实路径仍处早期搭建阶段。",
+        l2:"局限与风险", l2a:"<strong>容易理想化“真实”</strong>：可能对某些地方、某些人性状态有想象性投射。", l2b:"<strong>容易被精神意义驱动</strong>：如果长期没有 spark，可能感到空虚、倦怠。", l2c:"<strong>容易陷入过度思考</strong>：理解很多，但行动节奏不够稳时，会形成内耗。", l2d:"<strong>善良的代价</strong>：若没有边界和判断，善良会变成受伤点。", warnTag:"关键提醒：", warnText:"你最怕的是变冷漠。未来真正要防的，不只是“失败”，而是长期重复、麻木、无输出、无新体验造成的精神钝化。",
+        sk1:"核心能力", sk1a:"结构化思考与表达", sk1b:"长期写作与观察记录", sk1c:"情绪边界与成熟沟通", sk1d:"持续行动与自我管理",
+        sk2:"职业技能", sk2a:"Excel / 数据分析", sk2b:"工业工程基础：精益、流程优化、现场管理", sk2c:"项目管理与跨部门沟通", sk2d:"英语（尤其是阅读、听力、表达）",
+        sk3:"具体优先级", sk3a:"英语", sk3b:"Excel / 数据能力", sk3c:"IE / 精益生产知识", sk3d:"稳定写作习惯", sk3e:"基本投资认知（而非高风险交易冲动）",
+        c1:"近期最适合（现实可行）", c1a:"<strong>工业工程师 / 精益工程师</strong>：比模具设计更匹配你的组织、分析与优化倾向。", c1b:"<strong>制造业运营 / 生产管理 / 供应链方向</strong>：适合建立现实能力与资源基础。", c1c:"<strong>外企制造类岗位</strong>：更规范，也更有利于英语和国际视野发展。",
+        c2:"中长期高匹配（副线或转型）", c2a:"非虚构写作者 / 深度内容作者", c2b:"纪录片或访谈型内容创作", c2c:"产品 / 策略 / 研究型岗位", c2d:"旅行写作、社会观察、自媒体深度表达",
+        p71:"阶段一（23–26）", p71t:"先进入社会，建立稳定收入、行业理解、基本职业能力与储蓄。重点是：适应工作、观察行业、学英语、补数据与IE技能。",
+        p72:"阶段二（26–30）", p72t:"尝试跳向更高质量的平台，如外企、IE/精益、运营管理等方向。开始形成更强的职业自主性，同时持续写作与记录。",
+        p73:"阶段三（30+）", p73t:"在具备资金、语言与世界经验后，逐步靠近“旅行 + 写作 + 观察世界”的长期理想生活，可能发展出书、纪录片或长期非虚构项目。",
+        tl1y:"现在 · 23岁", tl1t:"进入现实世界，开始搭建人生系统", tl1d:"重点不是一次性找到完美职业，而是先积累社会经验、现金流、英语和可迁移能力，同时保护你的好奇心与写作冲动。",
+        tl2y:"24–26岁", tl2t:"完成从“学生”到“可独立生存的人”的转变", tl2d:"逐步从不适合的岗位中识别方向，向IE、精益、运营、外企制造方向靠近；让现实更稳，让表达不断线。",
+        tl3y:"26–30岁", tl3t:"建立更大的行动自由", tl3d:"存款、能力、语言和工作平台逐渐成熟，可以开始更长期地旅行、看世界，并把观察沉淀成文章、访谈或系列主题项目。",
+        tl4y:"30岁以后", tl4t:"逐步靠近“自由而清醒”的生活方式", tl4d:"一边维持稳定的现实基础，一边在不同地方生活、采访和写作，最终形成属于自己的非虚构叙事或长期个人作品。",
+        ls1:"最匹配的结构", ls1t:"<strong>稳定职业 + 长期阅读 + 持续写作 + 偶尔离开熟悉环境</strong>。你不适合完全封闭、纯功利、长期高重复的人生，也不适合完全脱离现实的漂浮式理想主义。",
+        ls2:"理想状态", ls2t:"有一份能带来稳定收入与时间边界的工作，保留写作、记录和投资习惯；未来在不同城市或国家长期生活一段时间，观察人，理解社会，形成自己的视角。",
+        bk1:"理解世界：历史与社会", bk1a:"建立全球历史脉络感，帮助你理解国家、文明与长期结构。", bk1b:"用宏观视角理解历史不平等的形成方式。", bk1c:"理解中国现实运行逻辑，帮助你从抽象兴趣回到社会结构。",
+        bk2:"理解人性：心理与认知", bk2a:"训练你识别判断偏差，提升结构化思考能力。", bk2b:"理解个体如何在关系、群体与社会环境中形成行为。", bk2c:"帮助你理解成长、责任、边界与心理成熟。",
+        bk3:"表达训练：写作与观察", bk3a:"你最急需补强的结构表达工具书。", bk3b:"非常适合你：现实观察、人物书写、跨文化理解。", bk3c:"帮助你把“想写”变成“能持续写”。",
+        bk4:"职业与能力：现实世界的底盘", bk4a:"如果你未来想向产品、策略、研究方向靠近，这本书很有帮助。", bk4b:"建立长期决策、系统思考与现实执行框架。", bk4c:"如果你留在制造业或IE方向，这是非常实用的底层书。",
+        toggleHint:"点击展开 / 收起",
+        ad1:"先站稳，再远行", ad1t:"你并不适合一开始就“为了自由而放弃现实”，更适合先建立职业底盘、现金流和能力，再换取真正的时间与地点自由。",
+        ad2:"不要只输入，要开始长期输出", ad2t:"每周至少写一篇观察或思考，哪怕 500–1000 字。你的很多潜能只有通过输出才会变成能力。",
+        ad3:"保护你的善良，但给它加上边界和判断", ad3t:"你不需要变冷酷才算成熟。你需要的是清醒的善良，而不是无边界的消耗。",
+        adFoot:"最终你真正要守住的，不只是“职业发展”，而是：在现实里站稳之后，仍然保有好奇、表达、善良和对世界的持续兴趣。",
+        ct1:"邮箱", ct2:"适合联系的话题", ct2t:"世界观察、城市与人、非虚构写作、制造业现实、旅行、自由、善良与如何在复杂中保持温度。",
+        tocTitle:"页面目录", tocNote:"这是一张阶段性的个人地图，不是终局结论。你最重要的任务不是立刻成为谁，而是持续成为更清醒、更自由、也更善良的人。",
+        footer:"Made for 清和 · 一个刚刚开始人生、对世界保持好奇的人。"
+      },
+      en: {
+        brandTitle: "Qinghe · Personal Profile & Life Map",
+        brandSub: "Enhanced: animated cover, timeline, collapsible bookshelf, bilingual switch, theme toggle",
+        tocBtn: "TOC",
+        navBooks: "Books",
+        navAdvice: "Advice",
+        coverEyebrow: "Personal Web · distilled from long conversations",
+        coverTitle: "Qinghe · Truth, Freedom, Kindness",
+        coverLead: "This is not a label-based assessment. It is a stage-based personal map summarizing your values, personality structure, talents, blind spots, career direction, skill gaps, and preferred way of living. The core conclusion is clear: you are someone oriented toward understanding the world, grounded in kindness, and moving toward freedom.",
+        coverQuote: "\"I want to see the world clearly without losing kindness; I want freedom, but not as an excuse to escape reality; I want to leave words behind, but first I want to live truthfully.\"",
+        ctaTimeline: "View Timeline",
+        ctaCareer: "Career Direction",
+        coverMini1: "Core Triad",
+        coverWords: "Truth · Freedom · Kindness",
+        chip1: "World Observer", chip2: "Reflective Expressor", chip3: "Pragmatic Idealist", chip4: "Meaning-Driven", chip5: "Experience First",
+        coverMini2: "One-line Portrait",
+        coverSentence: "A person just beginning life, deeply curious about the world, trying to stay warm while moving slowly toward freedom.",
+        stat1Label: "Core Drive", stat1Val: "Understand the world",
+        stat2Label: "Moral Base", stat2Val: "Kindness",
+        stat3Label: "Long-term Goal", stat3Val: "Freedom",
+        stat4Label: "Main Expression", stat4Val: "Travel + Writing",
+        contactLabel: "Contact",
+        sec1:"Worldview", sec2:"Personality", sec3:"Talents", sec4:"Limits", sec5:"Skills", sec6:"Career", sec7:"Plan", sec8:"Timeline", sec9:"Lifestyle", sec10:"Books", sec11:"Advice", sec12:"Contact",
+        h1:"1. Worldview, Life View, Values", h2:"2. Personality Traits", h3:"3. Talents & Strengths", h4:"4. Weaknesses, Blind Spots & Constraints", h5:"5. Skills Urgently Worth Building", h6:"6. Careers That Fit You Best", h7:"7. Career Planning", h8:"8. Timeline of Your Life Path", h9:"9. Best-suited Lifestyle", h10:"10. Recommended Books (Collapsible)", h11:"11. Advice for You", h12:"12. Contact",
+        wv1:"1. View of the World", wv1a:"The world is complex, fluid, and resistant to one final answer.", wv1b:"Understanding the world has no endpoint; exploration itself has value.", wv1c:"You care more about what lies behind narratives than surface positions.", wv1d:"You believe history, environment, and circumstance deeply shape people.",
+        wv2:"2. View of Life", wv2a:"Meaning comes more from experience, understanding, expression, and self-transformation than from achievement or fame.", wv2b:"Freedom is not the absence of constraints, but the ability to choose the constraints you willingly bear.", wv2c:"You want to live truthfully and resist being swallowed by false narratives or mechanical life.",
+        wv3:"3. Values", wv3a:"<strong>Kindness</strong> is the line you most want to protect.", wv3b:"You value empathy, but not emotional overreaction; you want to see essence and handle things calmly.", wv3c:"Depth, truth, and being truly understood by a few matter more to you than broad but shallow attention.",
+        pill1:"Existential tendency", pill2:"Process over result", pill3:"Acceptance of complexity", pill4:"Clear-eyed but not cynical", pill5:"Kindness over cold efficiency",
+        pCore:"Core Personality", pCoreText:"You are a hybrid of <strong>observer + thinker + recorder</strong>. You are drawn to people, cities, history, conflict, civilization, and the passing of time. You want both experience and understanding; idealism and realism coexist in you.",
+        s1:"Curiosity", s2:"Empathy", s3:"Reflection", s4:"Practical Sense", s5:"Risk Appetite",
+        pTrait:"Concrete Traits", p1:"Experience first: feel it, then record it, then express it.", p2:"You dislike shallow socializing but enjoy deep conversations.", p3:"You dislike meaningless procedures and repetitive labor.", p4:"You are more interested in the real human condition than in noisy success narratives.", p5:"You want clarity without losing warmth.", p6:"You prefer a few people who truly understand you over widespread but shallow approval.",
+        t1:"Expressive Talent", t1a:"Clear language ability and strong abstraction.", t1b:"Long-form writing potential: essays, observation writing, portraits, nonfiction.", t1c:"For you, writing is not only output but a tool for understanding yourself.",
+        t2:"Observational Talent", t2a:"You read people well and stay sensitive to emotion, motive, and environmental change.", t2b:"You naturally notice structure and contradiction beneath appearances.", t2c:"You have potential in interviews, field observation, and human-centered documentation.",
+        t3:"Project Talent", t3a:"You are not purely literary; you can also organize and move things forward.", t3b:"You fit projects with theme, structure, and long-term accumulation.", t3c:"You are well-suited to building ability in a real-world career and later transforming observation into work.",
+        talentFoot:"High-potential combination: <strong>observing people + researching problems + language expression + project organization</strong>. This fits deep-content work, documentary/nonfiction creation, product or strategy roles, and interview/research-oriented paths.",
+        l1:"Weaknesses", l1a:"<strong>More input than output</strong>: you think a lot, but your output system is not yet stable.", l1b:"<strong>Mismatch between major and interest</strong>: industrial engineering and your humanistic curiosity pull in different directions.", l1c:"<strong>Low tolerance for repetitive work</strong>: you are not suited for long-term mechanical, closed, monotonous roles.", l1d:"<strong>Direction not fully grounded yet</strong>: the ideal is clear, but the path is still under construction.",
+        l2:"Limits & Risks", l2a:"<strong>A tendency to idealize 'the real'</strong>: you may project meaning onto places or states of humanity.", l2b:"<strong>Meaning-driven vulnerability</strong>: when there is no spark for too long, you may feel hollow or tired.", l2c:"<strong>Overthinking risk</strong>: if action rhythm is weak, deep understanding can turn into internal friction.", l2d:"<strong>The cost of kindness</strong>: without boundaries and judgment, kindness becomes a point of injury.", warnTag:"Key reminder:", warnText:"What you fear most is becoming numb. The real risk is not just failure, but long repetition, dullness, lack of output, and lack of fresh experience.",
+        sk1:"Core Capacities", sk1a:"Structured thinking and expression", sk1b:"Long-term writing and observation", sk1c:"Emotional boundaries and mature communication", sk1d:"Consistent action and self-management",
+        sk2:"Professional Skills", sk2a:"Excel / data analysis", sk2b:"Industrial engineering basics: lean, process optimization, shopfloor management", sk2c:"Project management and cross-functional communication", sk2d:"English, especially reading, listening, and expression",
+        sk3:"Priority Order", sk3a:"English", sk3b:"Excel / data ability", sk3c:"IE / lean knowledge", sk3d:"Stable writing habit", sk3e:"Basic investing literacy rather than high-risk trading impulse",
+        c1:"Best Near-term Fits (realistic)", c1a:"<strong>Industrial engineer / lean engineer</strong>: more aligned than mold design with your tendency toward analysis, optimization, and organization.", c1b:"<strong>Manufacturing operations / production management / supply chain</strong>: good for building real-world competence and financial base.", c1c:"<strong>Foreign-invested manufacturing roles</strong>: usually more standardized and better for English plus an international horizon.",
+        c2:"High-fit Mid- to Long-term Paths", c2a:"Nonfiction writer / deep-content creator", c2b:"Documentary or interview-based storytelling", c2c:"Product / strategy / research roles", c2d:"Travel writing, social observation, deep self-media expression",
+        p71:"Phase I (23–26)", p71t:"Enter society, build stable income, industry understanding, basic work ability, and savings. Focus on adapting to work, reading the industry, learning English, and improving data / IE skills.",
+        p72:"Phase II (26–30)", p72t:"Move toward higher-quality platforms such as foreign companies, IE/lean, or operations management. Gain stronger autonomy while continuing to write and record.",
+        p73:"Phase III (30+)", p73t:"With savings, language ability, and world experience, move closer to your ideal of travel + writing + observing the world, possibly through a book, documentary, or a long-form nonfiction project.",
+        tl1y:"Now · Age 23", tl1t:"Enter the real world and start building a life system", tl1d:"The key is not to find the perfect career immediately, but to build social experience, cash flow, English, and transferable skills while protecting your curiosity and writing impulse.",
+        tl2y:"Age 24–26", tl2t:"Complete the shift from 'student' to 'independently living adult'", tl2d:"Gradually identify which roles do not fit you and move closer to IE, lean, operations, or foreign-invested manufacturing. Make life steadier without breaking your expressive line.",
+        tl3y:"Age 26–30", tl3t:"Build a larger zone of action freedom", tl3d:"As savings, skills, language, and work platform mature, you can begin longer travel and observation, turning those experiences into essays, interviews, or themed projects.",
+        tl4y:"After 30", tl4t:"Move closer to a free yet clear-eyed life", tl4d:"Maintain a stable real-world base while living in different places, interviewing, and writing, gradually shaping your own nonfiction narrative or major personal work.",
+        ls1:"Most fitting structure", ls1t:"<strong>Stable career + sustained reading + ongoing writing + periodic departure from familiar environments</strong>. You are not suited to a fully closed, purely utilitarian, highly repetitive life, nor to a reality-free floating idealism.",
+        ls2:"Ideal state", ls2t:"A job that offers stable income and clear time boundaries, while you keep writing, recording, and investing; later, you live in different cities or countries for a period of time, observe people, understand society, and shape your own point of view.",
+        bk1:"Understanding the World: History & Society", bk1a:"Build a global historical frame to understand nations, civilizations, and long structures.", bk1b:"Use a macro lens to understand how inequality in history forms.", bk1c:"Understand the logic of contemporary China and return from abstraction to structure.",
+        bk2:"Understanding Human Nature: Psychology & Cognition", bk2a:"Train yourself to spot biases and strengthen structured thinking.", bk2b:"Understand how individual behavior is shaped in relationships, groups, and social environments.", bk2c:"Helps you think about growth, responsibility, boundaries, and psychological maturity.",
+        bk3:"Expression Training: Writing & Observation", bk3a:"The structure-and-expression tool you most urgently need.", bk3b:"Very suitable for you: real-world observation, portraits, and cross-cultural understanding.", bk3c:"Helps turn 'wanting to write' into 'being able to keep writing.'",
+        bk4:"Career & Capacity: The Real-world Base", bk4a:"Helpful if you later move toward product, strategy, or research.", bk4b:"Build a long-term framework for decisions, systems thinking, and execution.", bk4c:"If you stay in manufacturing or IE, this is a very practical foundational book.",
+        toggleHint:"Click to expand / collapse",
+        ad1:"Stand first, then travel far", ad1t:"You are not suited to abandoning reality in the name of freedom. It fits you better to build a work base, cash flow, and capabilities first, then exchange them for real freedom of time and place.",
+        ad2:"Do not only consume input; begin long-term output", ad2t:"Write at least one observation or reflection each week, even if only 500–1000 words. Many of your talents become real only through expression.",
+        ad3:"Protect your kindness, but add boundaries and judgment", ad3t:"You do not need to become cold to become mature. What you need is clear-eyed kindness, not limitless self-consumption.",
+        adFoot:"In the end, what you really need to preserve is not just career growth, but curiosity, expression, kindness, and sustained interest in the world after you become stable in reality.",
+        ct1:"Email", ct2:"Good topics to contact me about", ct2t:"World observation, cities and people, nonfiction writing, manufacturing reality, travel, freedom, kindness, and how to stay warm in a complicated world.",
+        tocTitle:"Contents", tocNote:"This is a stage-based personal map, not a final verdict. Your task is not to become someone immediately, but to keep becoming more clear-eyed, more free, and still more kind.",
+        footer:"Made for Qinghe · someone just beginning life and staying curious about the world."
+      }
+    };
+
+    const progressBar = document.getElementById('progressBar');
+    const toTopBtn = document.getElementById('toTopBtn');
+    const toolTip = document.getElementById('toolTip');
+    const sectionEls = Array.from(document.querySelectorAll('.section-target'));
+    const tocLinks = Array.from(document.querySelectorAll('.toc a'));
+    const quickLinks = Array.from(document.querySelectorAll('#quickNav a'));
+    const mobileTocBtn = document.getElementById('mobileTocBtn');
+    const tocPanel = document.getElementById('tocPanel');
+    const themeToggle = document.getElementById('themeToggle');
+    const langToggle = document.getElementById('langToggle');
+
+    function showTip(text) {
+      toolTip.textContent = text;
+      toolTip.classList.add('show');
+      clearTimeout(showTip._timer);
+      showTip._timer = setTimeout(() => toolTip.classList.remove('show'), 1400);
+    }
+
+    function setTheme(mode) {
+      document.body.dataset.theme = mode;
+      localStorage.setItem('profile-theme', mode);
+      if (themeToggle) themeToggle.textContent = mode === 'light' ? '🌙 夜间' : '☀️ 日间';
+    }
+
+    const savedTheme = localStorage.getItem('profile-theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      setTheme('light');
+    } else {
+      setTheme('dark');
+    }
+
+    themeToggle?.addEventListener('click', () => {
+      const next = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+      setTheme(next);
+      showTip(next === 'light' ? '已切换到白天模式' : '已切换到夜间模式');
+    });
+
+    function applyLanguage(lang) {
+      localStorage.setItem('profile-lang', lang);
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        const value = I18N[lang][key];
+        if (value !== undefined) el.innerHTML = value;
+      });
+      langToggle.textContent = lang === 'zh' ? 'EN' : '中';
+      document.title = lang === 'zh' ? '清和｜个人画像与生涯网页' : 'Qinghe · Personal Profile & Life Map';
+    }
+
+    const savedLang = localStorage.getItem('profile-lang') || 'zh';
+    applyLanguage(savedLang);
+
+    langToggle?.addEventListener('click', () => {
+      const next = (localStorage.getItem('profile-lang') || 'zh') === 'zh' ? 'en' : 'zh';
+      applyLanguage(next);
+      showTip(next === 'zh' ? '已切换为中文' : 'Switched to English');
+    });
+
+    function updateProgress() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = max > 0 ? (scrollTop / max) * 100 : 0;
+      progressBar.style.width = percent + '%';
+      toTopBtn.classList.toggle('hide', scrollTop < 360);
+    }
+
+    function activateLink(id) {
+      [...tocLinks, ...quickLinks].forEach(link => {
+        const active = link.getAttribute('href') === '#' + id;
+        link.classList.toggle('active', active);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) activateLink(entry.target.id);
+      });
+    }, { rootMargin: '-22% 0px -62% 0px', threshold: 0.08 });
+    sectionEls.forEach(sec => observer.observe(sec));
+
+    toTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    mobileTocBtn?.addEventListener('click', () => {
+      tocPanel.classList.toggle('open');
+      mobileTocBtn.textContent = tocPanel.classList.contains('open')
+        ? ((localStorage.getItem('profile-lang') || 'zh') === 'zh' ? '收起目录' : 'Hide TOC')
+        : ((localStorage.getItem('profile-lang') || 'zh') === 'zh' ? '目录' : 'TOC');
+    });
+
+    document.querySelectorAll('.anchor').forEach(anchor => {
+      anchor.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const hash = anchor.dataset.anchor;
+        const full = window.location.origin + window.location.pathname + hash;
+        try {
+          await navigator.clipboard.writeText(full);
+          history.replaceState(null, '', hash);
+          showTip((localStorage.getItem('profile-lang') || 'zh') === 'zh' ? '已复制本节链接' : 'Section link copied');
+        } catch {
+          window.location.hash = hash;
+          showTip((localStorage.getItem('profile-lang') || 'zh') === 'zh' ? '链接已定位到本节' : 'Jumped to section');
+        }
+      });
+    });
+
+    document.querySelectorAll('.book-group').forEach(group => {
+      const btn = group.querySelector('.book-toggle');
+      const panel = group.querySelector('.book-panel');
+      const sync = () => {
+        panel.style.maxHeight = group.classList.contains('open') ? panel.scrollHeight + 'px' : '0px';
+      };
+      sync();
+      btn.addEventListener('click', () => {
+        group.classList.toggle('open');
+        sync();
+      });
+      window.addEventListener('resize', sync);
+    });
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+    if (sectionEls[0]) activateLink(sectionEls[0].id);
+  </script>
+</body>
+</html>
